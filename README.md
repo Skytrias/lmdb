@@ -1,5 +1,5 @@
 # Lightning Memory-Mapped Database Manager (LMDB)
-[http://www.lmdb.tech/doc/index.html](lmdb) bindings for [https://odin-lang.org/](odin)
+[lmdb](http://www.lmdb.tech/doc/index.html) bindings for [odin](https://odin-lang.org/)
 
 # Basic Example
 ```odin
@@ -60,4 +60,4 @@ main :: proc() {
 ```
 
 # License
-Not sure wether the License needs to be the same as the [https://www.openldap.org/software/release/license.html](original) as it's just bindings (with docs copied). Let me know if it has to match. 
+Not sure wether the License needs to be the same as the [original](https://www.openldap.org/software/release/license.html) as it's just bindings (with docs copied). Let me know if it has to match. 
