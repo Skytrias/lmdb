@@ -61,7 +61,7 @@ val :: struct {
 	mv_data: rawptr,
 }
 
-stat :: struct {
+stat_t :: struct {
 	ms_psize: c.uint,
 	ms_depth: c.uint,
 	ms_branch_pages: c.size_t,
@@ -193,7 +193,7 @@ foreign lmdb {
 	// Copy an LMDB environment to the specified path, with options. 
 	env_copy2 :: proc(env: ^env, path: cstring, flags: c.uint) -> c.int ---
 	// Return statistics about the LMDB environment. 
-	env_stat :: proc(env: ^env, stat: ^stat) -> c.int ---
+	env_stat :: proc(env: ^env, stat: ^stat_t) -> c.int ---
 	// Return information about the LMDB environment. 
 	env_info :: proc(env: ^env, info: ^envinfo) -> c.int ---
 	// Flush the data buffers to disk. 
@@ -243,7 +243,8 @@ foreign lmdb {
 	// Open a database in the environment. 
 	dbi_open :: proc(txn: ^txn, name: cstring, flags: c.uint, dbi: ^dbi) -> c.int ---
 	// Retrieve statistics for a database. 
-	dbi_stat :: proc(txn: ^txn, dbi: dbi, stat: ^stat) -> c.int ---
+	// @(link_name="stat")
+	stat :: proc(txn: ^txn, dbi: dbi, stat: ^stat_t) -> c.int ---
 	// Retrieve the DB flags for a database handle. 
 	dbi_flags :: proc(txn: ^txn, dbi: dbi, flags: c.uint) -> c.int ---
 	// Close a database handle. Normally unnecessary. Use with care: 
@@ -323,12 +324,6 @@ val_typed_make :: proc(data: ^$T) -> val {
 val_str_get :: proc(val: val) -> string {
 	return strings.string_from_ptr(cast(^byte) val.mv_data, int(val.mv_size))
 }
-
-// val_data_get :: proc(val: val) -> (data: rawptr, size: int) {
-// 	data = val.mv_data
-// 	size = int(val.mv_size)
-// 	return
-// }
 
 // get a typed result from an input val - sizes need to match
 val_typed_get :: proc(val: val, $T: typeid) -> (res: T) {
