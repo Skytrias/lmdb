@@ -34,11 +34,11 @@ main :: proc() {
 
     // // write some values (for testing only once to see persistent read)
     // fmt.eprintln("PUT")
-    // key = mdb.val_str("testing")
-    // data = mdb.val_str("Hello World")
+    // key = mdb.val_str_make("testing")
+    // data = mdb.val_str_make("Hello World")
     // check(mdb.put(txn, dbi, &key, &data))
-    // key = mdb.val_str("another")
-    // data = mdb.val_str("one")
+    // key = mdb.val_str_make("another")
+    // data = mdb.val_str_make("one")
     // check(mdb.put(txn, dbi, &key, &data))
 
     check(mdb.txn_commit(txn))
